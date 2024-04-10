@@ -1,0 +1,77 @@
+<div class="w-full h-screen mx-2 mt-2 bg-white rounded-md">
+     <h1 class="mx-auto mt-10 font-serif text-2xl font-extrabold text-center text-slate-800"> Student Information </h1>
+   
+     <form [formGroup]="userForm" (ngSubmit)="onSubmit()"
+       class="items-center justify-center mx-auto mt-10 border-4 border-black h-fit w-96 rounded-3xl">
+   
+       <div class="mx-3">
+         <div class="my-5">
+           <label for="name">Name :</label>
+           <input formControlName="name" class="ml-2 border-2 border-black rounded-md" pattern="[a-zA-Z ]+"
+             type="text" id="name" required>
+         </div>
+   
+         <div class="my-5">
+           <label for="mobile">Mobile :</label>
+           <input formControlName="mobile" class="ml-2 border-2 border-black rounded-md" type="text"
+             id="mobile" minlength="10" maxlength="10" pattern="[0-9]{10}" required>
+             <div *ngIf="userForm.get('mobile')?.errors?.['pattern'] && userForm.get('mobile')?.touched">
+               Please enter a valid 10-digit mobile number.
+             </div>             
+         </div>
+   
+         <div class="my-5">
+           <label for="emailId">Email ID :</label>
+           <input formControlName="emailId" class="ml-2 border-2 border-black rounded-md" type="text"
+             id="emailId" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+           <div *ngIf="userForm.get('emailId')?.errors?.['pattern ']&& userForm.get('emailId')?.touched">
+             Please enter a valid email address.
+           </div>
+         </div>
+   
+         <div class="my-5">
+           <label for="DOB">Date of birth :</label>
+           <input formControlName="DOB" class="ml-2 border-2 border-black rounded-md" type="date" name="DOB" id="DOB" (change)="calculateAge()">
+          </div>
+   
+         <div class="my-5">
+           <label for="age">Age:</label>
+           <input formControlName="age" value="age" name="age" class="ml-2 rounded-md" type="number" id="age" required>
+           <!-- {{age}}</label> -->
+         </div>
+       </div>
+   
+       <div class="mx-3">
+         <div class="my-5">
+           <label for="physics">Physics : </label>
+           <input formControlName="physics" class="w-12 ml-2 border-2 border-black rounded-md" type="number" min="0" max="100" (input)="calculateTotalAndAvg()"> / 100
+         </div>
+         <div class="my-5">
+           <label for="chemistry">Chemistry : </label>
+           <input formControlName="chemistry" class="w-12 ml-2 border-2 border-black rounded-md" type="number" min="0" max="100" (input)="calculateTotalAndAvg()"> / 100
+         </div>
+         <div class="my-5">
+           <label for="mathematics">Mathematics : </label>
+           <input formControlName="mathematics" class="w-12 ml-2 border-2 border-black rounded-md" type="number" min="0" max="100" (input)="calculateTotalAndAvg()"> / 100
+         </div>
+         <div class="my-5">
+           <label for="total">Total : </label>
+           <input formControlName="total" name="total" class="w-12 ml-2 rounded-md" type="text" id="total"> /300
+            <!-- {{ Total }} / 300 </label> -->
+         </div>
+         <div class="my-5">
+           <label for="avg_percentage">Average percentage : </label>
+           <input formControlName="avg_percentage" name="avg_percentage" value="avg_percentage" class="ml-2 "  type="text" id="avg_percentage">
+             <!-- {{ avg_percentage }} % -->
+           
+         </div>
+       </div>
+   
+       <div class="flex flex-row w-full mx-32 my-5 ">
+         <button class="items-center justify-center px-3 py-2 mr-10 font-sans text-xl font-extrabold bg-purple-600 border-2 border-black rounded-xl"
+           type="submit" [disabled]="userForm.invalid">SUBMIT</button>
+       </div>
+   
+     </form>
+   </div>
+   
